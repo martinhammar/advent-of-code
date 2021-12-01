@@ -10,8 +10,9 @@ Then we summarise the dataset:
 ```{r}
 input_file %>%
   mutate(prev_depth = lag(depth)) %>%
-  filter(!is.na(prev_depth)) %>%
-  summarise(n_increases = length(depth[depth > prev_depth]))
+  filter(!is.na(prev_depth),
+         depth > prev_depth) %>%
+  tally
 ```
 
 Then we plot it, to make sure we're not out of our depth:
