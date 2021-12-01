@@ -1,0 +1,21 @@
+
+```{r}
+library(tidyverse)
+
+input_file <- read.csv(file.choose(),
+                       col.names = "depth") 
+
+input_file %>%
+  summarise(n_increases = length(depth[depth > lag(depth)]))
+
+#I want to inspect this
+input_file %>%
+  mutate(row = 1:n()) %>%
+  ggplot(aes(x = row,
+             y = depth)) +
+  geom_point() +
+  geom_smooth()
+```
+
+
+
