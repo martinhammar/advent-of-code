@@ -1,14 +1,19 @@
-
+First we load the swiss army knife library and the dataset:
 ```{r}
 library(tidyverse)
 
 input_file <- read.csv(file.choose(),
                        col.names = "depth") 
+```
 
+Then we summarise the dataset:
+```{r}
 input_file %>%
   summarise(n_increases = length(depth[depth > lag(depth)]))
+```
 
-#I want to inspect this
+Then we plot it, to make sure we're not out of our depth:
+```{r}
 input_file %>%
   mutate(row = 1:n()) %>%
   ggplot(aes(x = row,
